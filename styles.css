@@ -1,0 +1,302 @@
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: #fff;
+    color: #222;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --border-color: #666; /* dark gray, not black */
+    --border-thin: 1.5px;
+    --border-thick: 2px;
+}
+
+.main {
+    display: flex;
+    height: 100vh;
+}
+
+.form {
+    width: 30%;
+    padding: 20px;
+    background-color: #f5f5f5;
+    overflow-y: auto;
+}
+
+.form h2 {
+    margin-top: 0;
+}
+
+.form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.receipt {
+    width: 70%;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    /* more comfortable top padding so header has breathing room */
+    padding: 20px 28px 30px 28px;
+}
+
+/* Temporary class applied when exporting to PDF to make the container fill more of the page */
+.container.pdf-export {
+    /* narrower centered content for A4-like white margins */
+    max-width: 620px; /* narrower than full width to match the original look */
+    width: 100%;
+    margin: 0.2in auto; /* smaller top margin */
+    /* restore moderate padding for PDF export so the layout has comfortable margins */
+    padding: 12px 28px 12px 28px;
+}
+
+/* Print / PDF tweaks */
+@media print {
+    body, html {
+        height: auto;
+        background: #fff;
+    }
+    .main, .form { display: block; }
+    .form { display: none !important; }
+    .receipt { width: 100%; padding: 0; }
+    .container {
+        max-width: 720px;
+        margin: 0.2in auto;
+        padding: 12px 10px 12px 10px;
+        box-shadow: none;
+    }
+    /* avoid floating issues when capturing */
+    .date, .total, .totals { float: none; text-align: right; }
+    hr { margin: 12px 0; }
+}
+
+/* Ensure page breaks are sensible when content is long */
+.container, .payments, .ride-details {
+    page-break-inside: avoid;
+}
+
+.header {
+    font-size: 1.6rem;
+    font-weight: 500; /* make header heavier */
+    color: #000; /* darker than default */
+    margin-bottom: 0px; /* no space below header */
+    margin-top: 0px; /* no top margin */
+    letter-spacing: -1px;
+
+}
+
+.date {
+    float: right;
+    font-size: 10px;
+    color: #666;
+    margin-top: 0px; /* align with header */
+    font-weight: 400;
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: 500; 
+    color: #000; /* darker text */
+    margin: 30px 0 10px 0;
+}
+
+.subtitle {
+    font-size: 10px;
+    color: #666;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 20px 0 10px 0;
+}
+
+hr {
+    border: none;
+    border-top: var(--border-thin) solid var(--border-color);
+    margin: 10px 0;
+}
+
+.dark{ /* keep backward-compatible class name for other uses */
+    /* thicker, dark-gray separator (not black) */
+    border: none;
+    border-top: var(--border-thick) solid var(--border-color);
+    margin: 10px 0;
+    height: 0;
+    background: none;
+}
+
+.total {
+    font-size: 0.9rem;
+    font-weight: 400;
+    float: right;
+    margin-top: 50px;
+}
+
+.totals {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-left: 10px;
+        float: right;
+
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.table td {
+    padding: 6px 0;
+    font-size: 0.9rem;
+}
+
+.small{
+    font-size: 9px !important;
+    font-weight: 300;
+}
+
+
+.small-numb{
+    font-size: 9px !important;
+    font-weight: 300;
+    text-align: right;
+}
+
+
+
+.table .label {
+    color: #666;
+    font-size: 8px;
+    font-weight: 500;
+}
+
+.table .value {
+    text-align: right;
+font-size: 8px;
+    font-weight: 500;}
+
+.payments {
+    margin-top: 30px;
+}
+
+.gap{
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.top{
+    margin-top: 25px;
+    border: none;
+    border-top: var(--border-thin) solid var(--border-color);
+}
+
+.payment-method {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+.payment-icon {
+    width: 34px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+.payment-details {
+    font-size: 12px;
+    color: #222;
+    margin-top: -10px;
+    font-weight: 400;
+}
+
+.payment-date {
+    font-size: 10px;
+    color: #666;
+    margin-left: 42px;
+    margin-top: -5px;
+}
+
+.link {
+    color: #0074e4;
+    text-decoration: underline;
+    font-size: 10px;
+}
+
+.gst {
+    font-size: 9px;
+    color: #222;
+    margin-top: 25px;
+}
+
+.ride-details {
+    margin-top: 30px;
+    font-size: 0.88rem;
+    color: #222;
+}
+
+.ride-details .label {
+    color: #000;
+    font-size: 8px;
+}
+
+.ride-details .info {
+    margin-bottom: 8px;
+}
+
+.ride-details .locations {
+    margin-top: 10px;
+}
+
+.location {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 4px;
+}
+
+.infos{
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.location-icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+    margin-top: 2px;
+}
+
+.location-time {
+    font-weight: 500;
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+.location-address {
+    font-size: 0.85rem;
+    color: #222;
+}
+
+.footer {
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: #666;
+}

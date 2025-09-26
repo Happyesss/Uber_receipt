@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Uber Receipt</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div class="main">
+		<div class="form">
+			<h2>Edit Receipt</h2>
+			<label for="date-input">Date:</label>
+			<input type="text" id="date-input" value="August 18, 2025"><br><br>
+			<label for="header-input">Header:</label>
+			<input type="text" id="header-input" value="Uber"><br><br>
+			<label for="title-input">Title:</label>
+			<input type="text" id="title-input" value="Here's your receipt for your ride, mansi"><br><br>
+			<label for="subtitle-input">Subtitle:</label>
+			<input type="text" id="subtitle-input" value="We hope you enjoyed your ride this morning."><br><br>
+			<label for="total-input">Total:</label>
+			<input type="text" id="total-input" value="₹109.98"><br><br>
+			<label for="trip-charge-input">Trip Charge:</label>
+			<input type="text" id="trip-charge-input" value="₹109.98"><br><br>
+			<label for="subtotal-input">Subtotal:</label>
+			<input type="text" id="subtotal-input" value="₹109.98"><br><br>
+			<label for="payment-method-input">Payment Method:</label>
+			<input type="text" id="payment-method-input" value="Cash"><br><br>
+			<label for="payment-date-input">Payment Date:</label>
+			<input type="text" id="payment-date-input" value="8/18/25 11:40 am"><br><br>
+			<label for="gst-input">GST:</label>
+			<input type="text" id="gst-input" value="₹6.34"><br><br>
+			<button id="download-pdf" style="padding: 10px 20px; background-color: #000; color: #fff; border: none; cursor: pointer;">Download as PDF</button>
+		</div>
+		<div class="receipt">
+			<div class="container">
+				<div class="date" id="date">August 18, 2025</div>
+				<div class="header" id="header">
+					<span style="font-size: 35px;">u</span><span style="font-weight: 549;">ber</span>
+				</div>
+				<hr>
+				<div class="title" id="title">Here's your receipt for your ride, mansi</div>
+				<div class="subtitle" id="subtitle">We hope you enjoyed your ride this morning.</div>
+
+				<div class="section-title">Total <span class="totals" id="total">₹109.98</span></div>
+				<hr class="dark">
+				<table class="table">
+					<tr>
+						<td class=" small">Trip charge</td>
+						<td class="small-numb" id="trip-charge">₹109.98</td>
+					</tr>
+				</table>
+				<hr>
+				<table class="table">
+					<tr>
+						<td class="label">Subtotal</td>
+						<td class="value" id="subtotal">₹109.98</td>
+					</tr>
+				</table>
+				<hr class="gap">
+
+
+		        		<hr>
+
+
+				<div class="payments">
+					<div class="section-title">Payments <span class="total" id="payment-total">₹109.98</span></div>
+					<div class="payment-method">
+						<img class="payment-icon" src="/money.png" alt="Cash">
+						<span class="payment-details" id="payment-method">Cash</span>
+					</div>
+					<div class="payment-date" id="payment-date">8/18/25 11:40 am</div>
+					<div style="margin-top:20px; font-size: 9px;">
+						<a class="link" href="#">Visit the trip page</a> for more information, including invoices (where available)
+					</div>
+					<div class="gst" id="gst">The total of ₹109.98 has a GST of ₹6.34 included.</div>
+				</div>
+
+
+        <hr class="top">
+
+		<div class="ride-details">
+			<div class="info">
+				<span class="label">You rode with Vijay</span><br>
+				<span class="label">License Plate: HR55AY7436</span>
+			</div>
+			<div class="infos" style="display: flex;  align-items: start; margin-top: 10px; margin-bottom: 10px;">
+                <div>
+                        <h1 style="font-size: 12px; font-weight: 400;">Uber Go</h1>
+                        <p style="font-size: 11px; font-weight: 400; margin-top: -10px;">minutes</p>
+                </div>
+
+                <div>
+
+                    <p style="font-size: 11px; margin-left: 20px; font-weight: 400;">6.96 kilometres | 14</p>
+
+                </div>
+			</div>
+
+
+			<div style="display: flex; align-items: center;">
+
+                <div>
+
+                     <img style="height: 50px; margin-right: 20px;" src="line.png" alt="">
+                </div>
+
+                <div style="display: flex; flex-direction: column;  margin-top: -10px;">
+<div >
+					<span style="font-size: 10px;"> <span style="font-weight: 500;">11:25 am | </span> 41, Mehrauli-Gurgaon Rd, Sector 28, Maruti Housing Colony, Sector 14, Gurugram, Haryana 122001, India</span>
+				</div>
+				<div  style="margin-top: 5px;">
+					<span style="font-size: 10px;"><span style="font-weight: 500;">11:40 am | </span> Thinkvalley, Plot no 37B, 2nd & 3rd Floor, 122022, Sector 32, Gurugram, Haryana 122001, India</span>
+				</div>
+                </div>
+				
+			</div>
+		</div>
+
+		<div style="margin-top: 30px; font-size: 10px;">
+			Fares are inclusive of GST. Please download the tax invoice from the trip detail page for a full tax breakdown.
+		</div>
+	</div>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>
