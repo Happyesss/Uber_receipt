@@ -7,7 +7,7 @@ body {
 }
 
 :root {
-    --border-color: #e5e5e5; /* light gray to match Uber receipt */
+    --border-color: #cccccc; /* darker gray */
     --border-thin: 1px;
     --border-thick: 1.7px;
 }
@@ -60,9 +60,9 @@ body {
     /* narrower centered content for A4-like white margins */
     max-width: 620px; /* narrower than full width to match the original look */
     width: 100%;
-    margin: 0.2in auto; /* smaller top margin */
-    /* restore moderate padding for PDF export so the layout has comfortable margins */
-    padding: 12px 28px 12px 28px;
+    margin: 0.18in auto; /* moderate top margin */
+    /* moderate top padding for PDF export so the receipt isn't too tight */
+    padding: 8px 28px 12px 28px;
 }
 
 /* Print / PDF tweaks */
@@ -76,8 +76,9 @@ body {
     .receipt { width: 100%; padding: 0; }
     .container {
         max-width: 720px;
-        margin: 0.2in auto;
-        padding: 12px 10px 12px 10px;
+        margin: 0.18in auto;
+        /* moderate top padding for print */
+        padding: 8px 10px 10px 10px;
         box-shadow: none;
     }
     /* avoid floating issues when capturing */
@@ -238,7 +239,7 @@ hr.gap {
 .top{
     margin-top: 25px;
     border: none;
-    border-top: var(--border-thin) solid var(--border-color);
+    border-top: var(--border-thick) solid var(--border-color);
 }
 
 .payment-method {
@@ -269,7 +270,7 @@ hr.gap {
 }
 
 .link {
-    color: #0074e4;
+    color: #0645AD; /* updated to match screenshot link blue */
     text-decoration: underline;
     font-size: 10px;
 }

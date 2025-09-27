@@ -29,17 +29,17 @@ document.getElementById('download-pdf').addEventListener('click', async function
     // use a comfortable max width when exporting
     container.style.maxWidth = '700px';
     container.style.width = '100%';
-    // slightly reduce top margin so the content moves up a bit on the page
-    container.style.margin = '0.15in auto';
-    // restore horizontal padding for a comfortable look in PDF
-    container.style.padding = '12px 28px 12px 28px';
+    // moderate top margin so the content has comfortable breathing room on the page
+    container.style.margin = '0.18in auto';
+    // moderate top padding for a comfortable look in PDF
+    container.style.padding = '8px 28px 12px 28px';
 
     // small delay to ensure styles reflow
     await new Promise(r => setTimeout(r, 100));
 
     const opt = {
-    // slightly reduced top margin (in inches) for PDF output, keep comfortable sides
-    margin: [0.35, 0.6, 0.5, 0.6], // top, left, bottom, right in inches
+    // moderate top margin (in inches) for PDF output, keep comfortable sides
+    margin: [0.18, 0.6, 0.5, 0.6], // top, left, bottom, right in inches
         filename: 'uber-receipt.pdf',
         image: { type: 'jpeg', quality: 1.0 },
         html2canvas: { scale: 3, useCORS: true },
