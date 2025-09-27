@@ -7,9 +7,9 @@ body {
 }
 
 :root {
-    --border-color: #666; /* dark gray, not black */
-    --border-thin: 1.5px;
-    --border-thick: 2px;
+    --border-color: #e5e5e5; /* light gray to match Uber receipt */
+    --border-thin: 1px;
+    --border-thick: 1.7px;
 }
 
 .main {
@@ -90,6 +90,13 @@ body {
     page-break-inside: avoid;
 }
 
+.header-row {
+    display: flex;
+    align-items: baseline; /* align date with header baseline */
+    justify-content: space-between;
+    gap: 12px;
+}
+
 .header {
     font-size: 1.6rem;
     font-weight: 500; /* make header heavier */
@@ -97,22 +104,22 @@ body {
     margin-bottom: 0px; /* no space below header */
     margin-top: 0px; /* no top margin */
     letter-spacing: -1px;
-
 }
 
 .date {
-    float: right;
     font-size: 10px;
-    color: #666;
+    color: #666; /* keep as grey, not border color */
     margin-top: 0px; /* align with header */
     font-weight: 400;
+    text-align: right;
+    white-space: nowrap;
 }
 
 .title {
     font-size: 1.2rem;
     font-weight: 500; 
     color: #000; /* darker text */
-    margin: 30px 0 10px 0;
+    margin: 15px 0 10px 0; /* reduced top margin */
 }
 
 .subtitle {
@@ -131,14 +138,38 @@ body {
 hr {
     border: none;
     border-top: var(--border-thin) solid var(--border-color);
-    margin: 10px 0;
+    margin: 15px 0; /* slightly more spacing to match Uber */
+}
+
+/* Thicker separators around the Subtotal area */
+/* 1) HR after the first charges table */
+.table + hr {
+    border-top: var(--border-thick) solid var(--border-color);
+}
+/* 2) The .gap HR before the Subtotal table */
+hr.gap {
+    border-top: var(--border-thick) solid var(--border-color);
+}
+/* 3) The HR right after the Subtotal table (appears as a plain hr after a .table) */
+.table + hr + .table + hr,
+.table + hr + hr {
+    border-top: var(--border-thick) solid var(--border-color);
+}
+
+/* Make the divider directly under the header/logo heavier and black */
+.header-row + hr {
+    border: none;
+    border-top: var(--border-thick) solid var(--border-color);
+    margin: 12px 0;
+    height: 0;
+    background: none;
 }
 
 .dark{ /* keep backward-compatible class name for other uses */
-    /* thicker, dark-gray separator (not black) */
+    /* black border below Total section as in Uber receipt */
     border: none;
-    border-top: var(--border-thick) solid var(--border-color);
-    margin: 10px 0;
+    border-top: var(--border-thick) solid #000;
+    margin: 10px 0 18px; /* add a bit more space below Total section */
     height: 0;
     background: none;
 }
@@ -151,7 +182,7 @@ hr {
 }
 
 .totals {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 400;
     margin-left: 10px;
         float: right;
@@ -169,29 +200,31 @@ hr {
 }
 
 .small{
-    font-size: 9px !important;
-    font-weight: 300;
+    font-size: 11px !important;
+    font-weight: 500; /* bit more font weight */
+    color: #666; /* grey color for trip charges */
 }
 
 
 .small-numb{
-    font-size: 9px !important;
-    font-weight: 300;
+    font-size: 11px !important;
+    font-weight: 500; /* bit more font weight */
     text-align: right;
+    color: #666; /* grey color for trip charges price */
 }
 
 
 
 .table .label {
-    color: #666;
-    font-size: 8px;
-    font-weight: 500;
+    color: #000; /* black color for subtotal label */
+    font-size: 11px; /* slightly smaller font size */
 }
 
 .table .value {
     text-align: right;
-font-size: 8px;
-    font-weight: 500;}
+    font-size: 11px; /* slightly smaller font size for subtotal price */
+    color: #000; /* black color for subtotal price */
+}
 
 .payments {
     margin-top: 30px;
@@ -255,7 +288,7 @@ font-size: 8px;
 
 .ride-details .label {
     color: #000;
-    font-size: 8px;
+    font-size: 10px; /* slightly larger for better readability */
 }
 
 .ride-details .info {
@@ -275,6 +308,30 @@ font-size: 8px;
 .infos{
     margin-top: 15px;
     margin-bottom: 10px;
+}
+
+/* Make the block under the license plate use the original gray color */
+.ride-details .infos {
+    color: #666;
+}
+
+/* Address after the time should be gray */
+.ride-details .infos .addr {
+    color: #666;
+}
+
+.license-plate {
+    color: #666 !important; /* explicitly ensure license plate is gray */
+}
+
+/* Make the 'Uber Go' heading black while keeping the surrounding .infos gray */
+.ride-details .infos h1 {
+    color: #000;
+}
+
+/* Ensure address spans anywhere inside ride-details are gray (covers cases outside .infos) */
+.ride-details .addr {
+    color: #666 !important;
 }
 
 .location-icon {
@@ -299,4 +356,27 @@ font-size: 8px;
     margin-top: 30px;
     font-size: 0.85rem;
     color: #666;
+}
+
+/* Small footer note under ride-details should be gray */
+.footer-note {
+    color: #666;
+}
+
+/* Utility to visually increase apparent font weight without changing the font face.
+   Uses multiple very small text-shadow layers to thicken strokes. This works well
+   for headings and short words (logo-like text). Tweak the offsets/colors to
+   increase/decrease the effect. */
+.boldify {
+    /* keep the original font weight close to normal to avoid layout shifts */
+    font-weight: 500;
+    /* subtler shadow stack for a lighter 'bold' effect */
+    text-shadow:
+        0.25px 0   0 #000,
+       -0.25px 0   0 #000,
+        0 0.25px   0 #000,
+        0 -0.25px  0 #000;
+    /* improve rendering on some browsers */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
