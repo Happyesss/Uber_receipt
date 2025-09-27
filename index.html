@@ -12,22 +12,56 @@
 			<h2>Edit Receipt</h2>
 			<label for="date-input">Date:</label>
 			<input type="text" id="date-input" value="August 18, 2025"><br><br>
-			<label for="header-input">Header:</label>
-			<input type="text" id="header-input" value="Uber"><br><br>
-			<label for="title-input">Title:</label>
-			<input type="text" id="title-input" value="Here's your receipt for your ride, mansi"><br><br>
-			<label for="subtitle-input">Subtitle:</label>
-			<input type="text" id="subtitle-input" value="We hope you enjoyed your ride this morning."><br><br>
-			<label for="total-input">Total:</label>
-			<input type="text" id="total-input" value="₹109.98"><br><br>
+			
+			<label for="name-input">Name:</label>
+			<input type="text" id="name-input" value="mansi"><br><br>
+			
+			<label>Time of Day:</label><br>
+			<input type="checkbox" id="morning" name="timeofday" value="morning" checked>
+			<label for="morning">Morning</label>
+			<input type="checkbox" id="afternoon" name="timeofday" value="afternoon">
+			<label for="afternoon">Afternoon</label>
+			<input type="checkbox" id="evening" name="timeofday" value="evening">
+			<label for="evening">Evening</label>
+			<input type="checkbox" id="night" name="timeofday" value="night">
+			<label for="night">Night</label><br><br>
+			
+			<label for="driver-name-input">Driver Name:</label>
+			<input type="text" id="driver-name-input" value="Vijay"><br><br>
+			
+			<label for="license-plate-input">License Plate:</label>
+			<input type="text" id="license-plate-input" value="HR55AY7436"><br><br>
+			
+			<label for="service-type-input">Service Type:</label>
+			<input type="text" id="service-type-input" value="Uber Go"><br><br>
+			
+			<label for="distance-input">Distance (km):</label>
+			<input type="text" id="distance-input" value="6.96"><br><br>
+			
+			<label for="duration-input">Duration (minutes):</label>
+			<input type="text" id="duration-input" value="14"><br><br>
+			
+			<label for="pickup-time-input">Pickup Time:</label>
+			<input type="text" id="pickup-time-input" value="11:25 am"><br><br>
+			
+			<label for="pickup-address-input">Pickup Address:</label>
+			<input type="text" id="pickup-address-input" value="41, Mehrauli-Gurgaon Rd, Sector 28, Maruti Housing Colony, Sector 14, Gurugram, Haryana 122001, India"><br><br>
+			
+			<label for="drop-time-input">Drop Time:</label>
+			<input type="text" id="drop-time-input" value="11:40 am"><br><br>
+			
+			<label for="drop-address-input">Drop Address:</label>
+			<input type="text" id="drop-address-input" value="Thinkvalley, Plot no 37B, 2nd & 3rd Floor, 122022, Sector 32, Gurugram, Haryana 122001, India"><br><br>
+			
 			<label for="trip-charge-input">Trip Charge:</label>
 			<input type="text" id="trip-charge-input" value="₹109.98"><br><br>
-			<label for="subtotal-input">Subtotal:</label>
-			<input type="text" id="subtotal-input" value="₹109.98"><br><br>
+			
 			<label for="payment-method-input">Payment Method:</label>
 			<input type="text" id="payment-method-input" value="Cash"><br><br>
-			<label for="payment-date-input">Payment Date:</label>
-			<input type="text" id="payment-date-input" value="8/18/25 11:40 am"><br><br>
+			
+			<label for="payment-time-input">Payment Time:</label>
+			<input type="text" id="payment-time-input" value="11:40 am"><br><br>
+			
 			<label for="gst-input">GST:</label>
 			<input type="text" id="gst-input" value="₹6.34"><br><br>
 			<button id="download-pdf" style="padding: 10px 20px; background-color: #000; color: #fff; border: none; cursor: pointer;">Download as PDF</button>
@@ -71,7 +105,7 @@
 						<img class="payment-icon" src="/money.png" alt="Cash">
 						<span class="payment-details" id="payment-method">Cash</span>
 					</div>
-					<div class="payment-date" id="payment-date">8/18/25 11:40 am</div>
+					<div class="payment-date" id="payment-date">11:40 am</div>
 					<div style="margin-top:20px; font-size: 9px;">
 						<a class="link" href="https://auth.uber.com/">Visit the trip page</a> for more information, including invoices (where available)
 					</div>
@@ -83,18 +117,18 @@
 
 		<div class="ride-details">
 			<div class="info">
-				<span class="label">You rode with Vijay</span><br>
-				<span class="label license-plate">License Plate: HR55AY7436</span>
+				<span class="label">You rode with <span id="driver-name">Vijay</span></span><br>
+				<span class="label license-plate">License Plate: <span id="license-plate">HR55AY7436</span></span>
 			</div>
 			<div class="infos" style="display: flex;  align-items: start; margin-top: 10px; margin-bottom: 10px;">
                 <div>
-                        <h1 style="font-size: 12px; font-weight: 400;">Uber Go</h1>
-                        <p style="font-size: 11px; font-weight: 400; margin-top: -10px;">minutes</p>
+                        <h1 style="font-size: 12px; font-weight: 400;" id="service-type">Uber Go</h1>
+                        <p style="font-size: 11px; font-weight: 400; margin-top: -10px;"><span id="duration">14</span> minutes</p>
                 </div>
 
                 <div>
 
-                    <p style="font-size: 11px; margin-left: 20px; font-weight: 400;">6.96 kilometres | 14</p>
+                    <p style="font-size: 11px; margin-left: 20px; font-weight: 400;"><span id="distance">6.96</span> kilometres | <span id="duration-2">14</span></p>
 
                 </div>
 			</div>
@@ -109,10 +143,10 @@
 
                 <div style="display: flex; flex-direction: column;  margin-top: -10px;">
 				<div >
-					<span style="font-size: 10px;"> <span style="font-weight: 500;">11:25 am | </span><span class="addr">41, Mehrauli-Gurgaon Rd, Sector 28, Maruti Housing Colony, Sector 14, Gurugram, Haryana 122001, India</span></span>
+					<span style="font-size: 10px;"> <span style="font-weight: 500;" id="pickup-time">11:25 am</span> | <span class="addr" id="pickup-address">41, Mehrauli-Gurgaon Rd, Sector 28, Maruti Housing Colony, Sector 14, Gurugram, Haryana 122001, India</span></span>
 				</div>
 				<div  style="margin-top: 5px;">
-					<span style="font-size: 10px;"><span style="font-weight: 500;">11:40 am | </span><span class="addr">Thinkvalley, Plot no 37B, 2nd & 3rd Floor, 122022, Sector 32, Gurugram, Haryana 122001, India</span></span>
+					<span style="font-size: 10px;"><span style="font-weight: 500;" id="drop-time">11:40 am</span> | <span class="addr" id="drop-address">Thinkvalley, Plot no 37B, 2nd & 3rd Floor, 122022, Sector 32, Gurugram, Haryana 122001, India</span></span>
 				</div>
                 </div>
 				

@@ -1,55 +1,92 @@
-// Function to update receipt from form
 function updateReceipt() {
+    const name = document.getElementById('name-input').value;
+    const tripCharge = document.getElementById('trip-charge-input').value;
+    const driverName = document.getElementById('driver-name-input').value;
+    const licensePlate = document.getElementById('license-plate-input').value;
+    const serviceType = document.getElementById('service-type-input').value;
+    const distance = document.getElementById('distance-input').value;
+    const duration = document.getElementById('duration-input').value;
+    const pickupTime = document.getElementById('pickup-time-input').value;
+    const pickupAddress = document.getElementById('pickup-address-input').value;
+    const dropTime = document.getElementById('drop-time-input').value;
+    const dropAddress = document.getElementById('drop-address-input').value;
+    const paymentTime = document.getElementById('payment-time-input').value;
+    
+    let timeOfDay = 'morning';
+    const checkboxes = document.querySelectorAll('input[name="timeofday"]');
+    checkboxes.forEach(cb => {
+        if (cb.checked) {
+            timeOfDay = cb.value;
+        }
+    });
+    
     document.getElementById('date').textContent = document.getElementById('date-input').value;
-    document.getElementById('header').textContent = document.getElementById('header-input').value;
-    document.getElementById('title').textContent = document.getElementById('title-input').value;
-    document.getElementById('subtitle').textContent = document.getElementById('subtitle-input').value;
-    document.getElementById('total').textContent = document.getElementById('total-input').value;
-    document.getElementById('trip-charge').textContent = document.getElementById('trip-charge-input').value;
-    document.getElementById('subtotal').textContent = document.getElementById('subtotal-input').value;
+    document.getElementById('title').textContent = `Here's your receipt for your ride, ${name}`;
+    document.getElementById('subtitle').textContent = `We hope you enjoyed your ride this ${timeOfDay}.`;
+    
+    document.getElementById('driver-name').textContent = driverName;
+    document.getElementById('license-plate').textContent = licensePlate;
+    document.getElementById('service-type').textContent = serviceType;
+    
+    document.getElementById('distance').textContent = distance;
+    document.getElementById('duration').textContent = duration;
+    document.getElementById('duration-2').textContent = duration;
+    
+    document.getElementById('pickup-time').textContent = pickupTime;
+    document.getElementById('pickup-address').textContent = pickupAddress;
+    document.getElementById('drop-time').textContent = dropTime;
+    document.getElementById('drop-address').textContent = dropAddress;
+    
+    document.getElementById('total').textContent = tripCharge;
+    document.getElementById('trip-charge').textContent = tripCharge;
+    document.getElementById('subtotal').textContent = tripCharge;
+    document.getElementById('payment-total').textContent = tripCharge;
+    
     document.getElementById('payment-method').textContent = document.getElementById('payment-method-input').value;
-    document.getElementById('payment-date').textContent = document.getElementById('payment-date-input').value;
-    document.getElementById('gst').textContent = `The total of ${document.getElementById('total-input').value} has a GST of ${document.getElementById('gst-input').value} included.`;
-    document.getElementById('payment-total').textContent = document.getElementById('total-input').value;
+    document.getElementById('payment-date').textContent = paymentTime;
+    document.getElementById('gst').textContent = `The total of ${tripCharge} has a GST of ${document.getElementById('gst-input').value} included.`;
 }
 
-// Add event listeners to form inputs
-document.querySelectorAll('.form input').forEach(input => {
+document.querySelectorAll('.form input[type="text"]').forEach(input => {
     input.addEventListener('input', updateReceipt);
 });
 
-// Download PDF (export the inner .container as A4 with tight margins)
+document.querySelectorAll('input[name="timeofday"]').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            document.querySelectorAll('input[name="timeofday"]').forEach(cb => {
+                if (cb !== this) cb.checked = false;
+            });
+        }
+        updateReceipt();
+    });
+});
+
+updateReceipt();
+
 document.getElementById('download-pdf').addEventListener('click', async function() {
     const container = document.querySelector('.container');
-
-    // Temporarily apply inline styles to force a centered, narrow container for capture
     const origInline = container.getAttribute('style') || '';
+    
     container.classList.add('pdf-export');
     container.style.boxSizing = 'border-box';
-    // use a comfortable max width when exporting
     container.style.maxWidth = '700px';
     container.style.width = '100%';
-    // moderate top margin so the content has comfortable breathing room on the page
     container.style.margin = '0.18in auto';
-    // moderate top padding for a comfortable look in PDF
     container.style.padding = '8px 28px 12px 28px';
 
-    // small delay to ensure styles reflow
     await new Promise(r => setTimeout(r, 100));
 
     const opt = {
-    // moderate top margin (in inches) for PDF output, keep comfortable sides
-    margin: [0.18, 0.6, 0.5, 0.6], // top, left, bottom, right in inches
+        margin: [0.18, 0.6, 0.5, 0.6],
         filename: 'uber-receipt.pdf',
         image: { type: 'jpeg', quality: 1.0 },
         html2canvas: { scale: 3, useCORS: true },
         jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
 
-    // Generate PDF from the container element
     await html2pdf().set(opt).from(container).save();
 
-    // restore original inline styles and remove temporary class after export
     if (origInline) {
         container.setAttribute('style', origInline);
     } else {
